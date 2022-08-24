@@ -72,13 +72,16 @@ Read though the following guide to generate a Personal Access Token:
 
 Then run the following on your local machine to stand up and register an agent
 
-``` shell
+``` text
 docker run --name docker-agent \
+    --network labnetwork \
     -e AZP_AGENT_NAME=docker-agent \
     -e AZP_URL=https://dev.azure.com/<org name> \
     -e AZP_TOKEN=<token value> \
     -e JAVA_HOME_8_X64=/usr/lib/jvm/java-8-openjdk-amd64/ \
     emberstack/azure-pipelines-agent
+```
+``` shell
 ...
 >> Connect:
 
@@ -95,13 +98,12 @@ Testing agent connection.
 Scanning for tool capabilities.
 Connecting to the server.
 2022-08-09 18:56:29Z: Listening for Jobs
-
+```
+``` text
 # In another terminal
 docker exec -it docker-agent /bin/bash
 root@24015a1f449b:/azp# apt update
-...
 root@24015a1f449b:/azp# apt install maven openjdk-8-jdk
-...
 ```
 
 > Notes: This local Docker agent should work on local dev workstations, but it is possible that network firewalls may block this connection from occurring. 
